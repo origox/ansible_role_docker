@@ -1,7 +1,24 @@
 ---
-- name: Ensure git is installed
-  ansible.builtin.apt:
-    name: git
+- name: Add Docker GPG apt key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-    update_cache: yes
+  become: true
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+  become: true
+
+- name: Update apt and install docker-ce
+  ansible.builtin.apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+  become: true
+
+- name: Install Docker Module for Python
+  ansible.builtin.pip:
+    name: docker
   become: true
