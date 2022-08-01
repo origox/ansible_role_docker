@@ -23,9 +23,9 @@
     name: docker
   become: true
 
-- name: Add ansible user to "docker" group
+- name: Add a user to "docker" group
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ docker_remote_user }}"
     groups: docker
     append: yes
   become: true

@@ -1,3 +1,4 @@
 ---
 warn_list:  # or 'skip_list' to silence them completely
   - experimental  # all rules tagged as experimental
+  - package-latest  # Package installs should not use latest.
